@@ -9,7 +9,7 @@ type Opts = {
 
 export const cli = async ({ stdin, stdout, stderr }: Opts): Promise<number> => {
   try {
-    stdout.write('test')
+    await reposition(stdin, stdout)
   } catch (err: any) {
     stderr.write(err.toString())
     stderr.write('\n')
