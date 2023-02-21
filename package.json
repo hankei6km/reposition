@@ -16,7 +16,9 @@
   },
   "scripts": {
     "start": "npm run build && node dist/main.js",
+    "debug": "npm run build:debug && node --inspect dist/main.js",
     "build": "npm run clean && tsc && rimraf dist/test && mv dist/src/* dist/ && rimraf dist/src",
+    "build:debug": "npm run clean && tsc --sourceMap --sourceRoot \"${PWD}\" && rimraf dist/test && mv dist/src/* dist/ && rimraf dist/src",
     "test": "node --experimental-vm-modules node_modules/.bin/jest",
     "lint:type-check": "tsc --noEmit",
     "clean": "rimraf \"dist/\"",
