@@ -74,6 +74,7 @@ describe('cli', () => {
     expect(mockRepositionFn).toBeCalledWith({
       client: dummyInstance,
       databaseId,
+      filterTimeRange,
       input: stdin,
       output: stdout
     })
@@ -97,6 +98,7 @@ describe('cli', () => {
     expect(mock.mockReposition).toBeCalledWith({
       client: dummyInstance,
       databaseId,
+      filterTimeRange,
       input: stdin,
       output: stdout
     })
