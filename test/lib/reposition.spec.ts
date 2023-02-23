@@ -60,7 +60,12 @@ describe('reposition', () => {
     stdout.on('data', (d) => (outData = outData + d))
     const mockClient = getMockClient([])
 
-    await reposition(mockClient, databaseId, stdin, stdout)
+    await reposition({
+      client: mockClient,
+      databaseId,
+      input: stdin,
+      output: stdout
+    })
 
     expect(outData).toEqual('')
     expect(mockClient.databases.query).toBeCalledTimes(data.length)
@@ -94,7 +99,12 @@ describe('reposition', () => {
     const mockClient = getMockClient([])
 
     await expect(
-      reposition(mockClient, databaseId, stdin, stdout)
+      reposition({
+        client: mockClient,
+        databaseId,
+        input: stdin,
+        output: stdout
+      })
     ).rejects.toThrowError(
       "Validate Repo Item: must have required property 'createdAt'"
     )
@@ -129,7 +139,12 @@ describe('reposition', () => {
     })
 
     await expect(
-      reposition(mockClient, databaseId, stdin, stdout)
+      reposition({
+        client: mockClient,
+        databaseId,
+        input: stdin,
+        output: stdout
+      })
     ).rejects.toThrowError('send: query: test-error-in-query')
   })
 })

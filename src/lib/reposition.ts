@@ -6,12 +6,19 @@ import { Chan } from 'chanpuru'
 import { validateRepoItem } from './validate.js'
 import { send } from './notion.js'
 
-export async function reposition(
-  client: Client,
-  databaseId: string,
-  input: Readable,
+export type RepositionOpts = {
+  client: Client
+  databaseId: string
+  input: Readable
   output: Writable
-) {
+}
+
+export async function reposition({
+  client,
+  databaseId,
+  input,
+  output
+}: RepositionOpts) {
   const jsonStream = input.pipe(parse())
   const ch = new Chan<Promise<void>>(3, { rejectInReceiver: true })
   let err: Error | null = null

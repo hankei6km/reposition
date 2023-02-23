@@ -18,7 +18,7 @@ export const cli = async ({
 }: Opts): Promise<number> => {
   try {
     const client = new Client({ auth: apiKey })
-    await reposition(client, databaseId, stdin, stdout)
+    await reposition({ client, databaseId, input: stdin, output: stdout })
   } catch (err: any) {
     stderr.write(err.toString())
     stderr.write('\n')

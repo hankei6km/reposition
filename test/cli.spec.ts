@@ -70,12 +70,12 @@ describe('cli', () => {
     const { mockReposition: mockRepositionFn } = (
       mockReposition as any
     )._getMocks()
-    expect(mockRepositionFn).toBeCalledWith(
-      dummyInstance,
+    expect(mockRepositionFn).toBeCalledWith({
+      client: dummyInstance,
       databaseId,
-      stdin,
-      stdout
-    )
+      input: stdin,
+      output: stdout
+    })
     expect(outData).toEqual('')
     expect(errData).toEqual('')
   })
@@ -93,12 +93,12 @@ describe('cli', () => {
 
     const { dummyInstance } = (mockClient as any)._getMocks()
     const mock = (mockReposition as any)._getMocks()
-    expect(mock.mockReposition).toBeCalledWith(
-      dummyInstance,
+    expect(mock.mockReposition).toBeCalledWith({
+      client: dummyInstance,
       databaseId,
-      stdin,
-      stdout
-    )
+      input: stdin,
+      output: stdout
+    })
     expect(outData).toEqual('')
     expect(errData).toEqual('dummy-error\n')
   })
