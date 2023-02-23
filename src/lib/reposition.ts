@@ -1,10 +1,17 @@
 import { Readable, Writable } from 'node:stream'
 import util from 'node:util'
+import type { Client } from '@notionhq/client'
 import { parse } from 'ndjson'
 import { Chan } from 'chanpuru'
 import { validateRepoItem } from './validate.js'
+import { send } from './notion.js'
 
-export async function reposition(input: Readable, output: Writable) {
+export async function reposition(
+  client: Client,
+  databaseId: string,
+  input: Readable,
+  output: Writable
+) {
   const jsonStream = input.pipe(parse())
   const ch = new Chan<Promise<void>>(3, { rejectInReceiver: true })
   let err: Error | null = null
@@ -15,7 +22,9 @@ export async function reposition(input: Readable, output: Writable) {
     try {
       for await (const data of jsonStream) {
         const p = (async (data: any) => {
-          await LogWrite(`${validateRepoItem(data)}\n`)
+          if (validateRepoItem(data)) {
+            await send(client, databaseId, data)
+          }
         })(data)
         await ch.send(p)
       }
