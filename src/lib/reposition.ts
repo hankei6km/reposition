@@ -5,10 +5,12 @@ import { parse } from 'ndjson'
 import { Chan } from 'chanpuru'
 import { validateRepoItem } from './validate.js'
 import { send } from './notion.js'
+import { Filter } from './filter.js'
 
 export type RepositionOpts = {
   client: Client
   databaseId: string
+  filterTimeRange: number
   input: Readable
   output: Writable
 }
@@ -16,12 +18,14 @@ export type RepositionOpts = {
 export async function reposition({
   client,
   databaseId,
+  filterTimeRange,
   input,
   output
 }: RepositionOpts) {
   const jsonStream = input.pipe(parse())
   const ch = new Chan<Promise<void>>(3, { rejectInReceiver: true })
   let err: Error | null = null
+  const filter = new Filter({ now: Date.now(), filterTimeRange })
   const LogWrite: (chunk: any, encoding?: BufferEncoding) => Promise<any> =
     util.promisify(output.write.bind(output))
 
@@ -29,7 +33,7 @@ export async function reposition({
     try {
       for await (const data of jsonStream) {
         const p = (async (data: any) => {
-          if (validateRepoItem(data)) {
+          if (validateRepoItem(data) && filter.do(data)) {
             await send(client, databaseId, data)
           }
         })(data)

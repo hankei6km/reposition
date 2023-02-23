@@ -63,12 +63,68 @@ describe('reposition', () => {
     await reposition({
       client: mockClient,
       databaseId,
+      filterTimeRange: 0,
       input: stdin,
       output: stdout
     })
 
     expect(outData).toEqual('')
     expect(mockClient.databases.query).toBeCalledTimes(data.length)
+  })
+
+  it('should drop items by filter', async () => {
+    const now = Date.now()
+    const data = [
+      JSON.stringify({
+        createdAt: '2022-02-05T14:16:25Z',
+        description: '',
+        name: 'aaaaa',
+        nameWithOwner: 'hankei6km/aaaaa',
+        openGraphImageUrl:
+          'https://opengraph.githubassets.com/0e9a92dd721c4e6cb2b82df96a66133ac93d43c4233159c1d1c3d1bc420a4fd2/hankei6km/chanpuru',
+        owner: {
+          id: 'abc123',
+          login: 'hankei6km'
+        },
+        pushedAt: new Date(now).toISOString(),
+        repositoryTopics: null,
+        updatedAt: new Date(now).toISOString(),
+        url: 'https://github.com/hankei6km/aaaaa'
+      }),
+      JSON.stringify({
+        createdAt: '2022-02-05T14:16:25Z',
+        description: '',
+        name: 'aaaaa',
+        nameWithOwner: 'hankei6km/aaaaa',
+        openGraphImageUrl:
+          'https://opengraph.githubassets.com/0e9a92dd721c4e6cb2b82df96a66133ac93d43c4233159c1d1c3d1bc420a4fd2/hankei6km/chanpuru',
+        owner: {
+          id: 'abc123',
+          login: 'hankei6km'
+        },
+        pushedAt: new Date(now - 172801 * 1000).toISOString(),
+        repositoryTopics: null,
+        updatedAt: new Date(now - 172801 * 1000).toISOString(),
+        url: 'https://github.com/hankei6km/aaaaa'
+      })
+    ]
+    const input = data.join('\n')
+    const stdin = mockStdin(input) as unknown as Readable
+    const stdout = new PassThrough()
+    let outData = ''
+    stdout.on('data', (d) => (outData = outData + d))
+    const mockClient = getMockClient([])
+
+    await reposition({
+      client: mockClient,
+      databaseId,
+      filterTimeRange: 172800, //2days
+      input: stdin,
+      output: stdout
+    })
+
+    expect(outData).toEqual('')
+    expect(mockClient.databases.query).toBeCalledTimes(data.length - 1)
   })
 
   it('should throw errors(invalid data)', async () => {
@@ -102,6 +158,7 @@ describe('reposition', () => {
       reposition({
         client: mockClient,
         databaseId,
+        filterTimeRange: 0,
         input: stdin,
         output: stdout
       })
@@ -142,6 +199,7 @@ describe('reposition', () => {
       reposition({
         client: mockClient,
         databaseId,
+        filterTimeRange: 0,
         input: stdin,
         output: stdout
       })

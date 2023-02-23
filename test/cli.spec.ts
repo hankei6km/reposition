@@ -52,6 +52,7 @@ describe('cli', () => {
   })
   const apiKey: any = 'test-api-key'
   const databaseId = 'test-database-id'
+  const filterTimeRange = 0
   it('should run normally', async () => {
     const stdin: any = 'dummy-stdin'
     const stdout = new PassThrough()
@@ -61,7 +62,7 @@ describe('cli', () => {
     let errData = ''
     stderr.on('data', (d) => (errData = errData + d))
 
-    await cli({ apiKey, databaseId, stdin, stdout, stderr })
+    await cli({ apiKey, databaseId, filterTimeRange, stdin, stdout, stderr })
 
     const { mockClient: mockClientFn, dummyInstance } = (
       mockClient as any
@@ -73,6 +74,7 @@ describe('cli', () => {
     expect(mockRepositionFn).toBeCalledWith({
       client: dummyInstance,
       databaseId,
+      filterTimeRange,
       input: stdin,
       output: stdout
     })
@@ -89,13 +91,14 @@ describe('cli', () => {
     stderr.on('data', (d) => (errData = errData + d))
     ;(mockReposition as any)._reset('dummy-error')
 
-    await cli({ apiKey, databaseId, stdin, stdout, stderr })
+    await cli({ apiKey, databaseId, filterTimeRange, stdin, stdout, stderr })
 
     const { dummyInstance } = (mockClient as any)._getMocks()
     const mock = (mockReposition as any)._getMocks()
     expect(mock.mockReposition).toBeCalledWith({
       client: dummyInstance,
       databaseId,
+      filterTimeRange,
       input: stdin,
       output: stdout
     })
