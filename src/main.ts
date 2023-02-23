@@ -23,6 +23,14 @@ const envVarsPrefix = process.env['REPOSITION_ENV_VARS_PREFIX'] || 'REPOSITION'
         array: false,
         required: true,
         description: 'The id of database in Notion'
+      },
+      'filter-time-range': {
+        type: 'number',
+        array: false,
+        required: false,
+        default: 0,
+        description:
+          'Time range(seconds) to filter repos to send. Send all repos by default'
       }
     })
     .help().argv
