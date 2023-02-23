@@ -39,6 +39,7 @@ const envVarsPrefix = process.env['REPOSITION_ENV_VARS_PREFIX'] || 'REPOSITION'
     await cli({
       apiKey: argv['api-key'],
       databaseId: argv['database-id'],
+      filterTimeRange: argv['filter-time-range'],
       stdin: process.stdin,
       stdout: process.stdout,
       stderr: process.stderr
