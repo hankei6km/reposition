@@ -29,8 +29,24 @@ export function pageParams(repo: RepoItem): {
         }
       ]
     },
+    name: {
+      rich_text: [
+        {
+          type: 'text',
+          text: { content: repo.name }
+        }
+      ]
+    },
     title: {
       title: [{ type: 'text', text: { content: repo.nameWithOwner } }]
+    },
+    owner: {
+      rich_text: [
+        {
+          type: 'text',
+          text: { content: repo.owner.login }
+        }
+      ]
     },
     //openGraphImageUrl: {
     //  files: [
@@ -45,6 +61,9 @@ export function pageParams(repo: RepoItem): {
     //},
     repositoryTopics: {
       multi_select: (repo.repositoryTopics || []).map(({ name }) => ({ name }))
+    },
+    pushedAt: {
+      date: { start: repo.pushedAt }
     },
     updatedAt: {
       date: { start: repo.updatedAt }
@@ -61,7 +80,7 @@ export async function send(client: Client, databaseId: string, repo: RepoItem) {
     .query({
       database_id: databaseId,
       filter: {
-        property: 'name',
+        property: 'title',
         title: {
           equals: repo.nameWithOwner
         }

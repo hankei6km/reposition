@@ -10,8 +10,11 @@ export const RepoItemSchema = {
   type: 'object',
   required: [
     'createdAt',
+    'name',
     'nameWithOwner',
     'openGraphImageUrl',
+    'owner',
+    'pushedAt',
     'updatedAt',
     'url'
   ],
@@ -23,12 +26,24 @@ export const RepoItemSchema = {
     description: {
       type: 'string'
     },
+    name: {
+      type: 'string'
+    },
     nameWithOwner: {
       type: 'string'
     },
     openGraphImageUrl: {
       type: 'string',
       format: 'uri'
+    },
+    owner: {
+      type: 'object',
+      required: ['login'],
+      properties: {
+        login: {
+          type: 'string'
+        }
+      }
     },
     repositoryTopics: {
       type: ['array', 'null'],
@@ -41,6 +56,10 @@ export const RepoItemSchema = {
           }
         }
       }
+    },
+    pushedAt: {
+      type: 'string',
+      format: 'date-time'
     },
     updatedAt: {
       type: 'string',
