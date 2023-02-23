@@ -23,19 +23,31 @@ describe('reposition', () => {
       JSON.stringify({
         createdAt: '2022-02-05T14:16:25Z',
         description: '',
+        name: 'aaaaa',
         nameWithOwner: 'hankei6km/aaaaa',
         openGraphImageUrl:
           'https://opengraph.githubassets.com/0e9a92dd721c4e6cb2b82df96a66133ac93d43c4233159c1d1c3d1bc420a4fd2/hankei6km/chanpuru',
+        owner: {
+          id: 'abc123',
+          login: 'hankei6km'
+        },
         repositoryTopics: null,
+        pushedAt: '2022-02-23T13:55:00Z',
         updatedAt: '2022-02-23T13:55:00Z',
         url: 'https://github.com/hankei6km/aaaaa'
       }),
       JSON.stringify({
         createdAt: '2022-02-05T14:16:25Z',
         description: '',
+        name: 'aaaaa',
         nameWithOwner: 'hankei6km/aaaaa',
         openGraphImageUrl:
           'https://opengraph.githubassets.com/0e9a92dd721c4e6cb2b82df96a66133ac93d43c4233159c1d1c3d1bc420a4fd2/hankei6km/chanpuru',
+        owner: {
+          id: 'abc123',
+          login: 'hankei6km'
+        },
+        pushedAt: '2022-02-23T13:55:00Z',
         repositoryTopics: null,
         updatedAt: '2022-02-23T13:55:00Z',
         url: 'https://github.com/hankei6km/aaaaa'
@@ -59,11 +71,17 @@ describe('reposition', () => {
       JSON.stringify({
         createdAt: '2022-02-05T14:16:25Z',
         description: '',
+        name: 'aaaaa',
         nameWithOwner: 'hankei6km/aaaaa',
+        owner: {
+          id: 'abc123',
+          login: 'hankei6km'
+        },
         openGraphImageUrl:
           'https://opengraph.githubassets.com/0e9a92dd721c4e6cb2b82df96a66133ac93d43c4233159c1d1c3d1bc420a4fd2/hankei6km/chanpuru',
         repositoryTopics: null,
         updatedAt: '2022-02-23T13:55:00Z',
+        pushedAt: '2022-02-23T13:55:00Z',
         url: 'https://github.com/hankei6km/aaaaa'
       }),
       JSON.stringify({})
@@ -87,10 +105,16 @@ describe('reposition', () => {
       JSON.stringify({
         createdAt: '2022-02-05T14:16:25Z',
         description: '',
+        name: 'hankei6km/aaaaa',
         nameWithOwner: 'hankei6km/aaaaa',
         openGraphImageUrl:
           'https://opengraph.githubassets.com/0e9a92dd721c4e6cb2b82df96a66133ac93d43c4233159c1d1c3d1bc420a4fd2/hankei6km/chanpuru',
+        owner: {
+          id: 'abc123',
+          login: 'hankei6km'
+        },
         repositoryTopics: null,
+        pushedAt: '2022-02-23T13:55:00Z',
         updatedAt: '2022-02-23T13:55:00Z',
         url: 'https://github.com/hankei6km/aaaaa'
       })
