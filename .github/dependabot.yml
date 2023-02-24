@@ -13,7 +13,7 @@ updates:
       - dependency-name: "@types/node"
         versions: ["17.x", "19.x"]
         update-types: ["version-update:semver-patch"]
-        
+
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
