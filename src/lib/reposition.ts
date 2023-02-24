@@ -11,6 +11,7 @@ export type RepositionOpts = {
   client: Client
   databaseId: string
   filterTimeRange: number
+  workersNum: number
   input: Readable
   output: Writable
 }
@@ -19,11 +20,12 @@ export async function reposition({
   client,
   databaseId,
   filterTimeRange,
+  workersNum,
   input,
   output
 }: RepositionOpts) {
   const jsonStream = input.pipe(parse())
-  const ch = new Chan<Promise<void>>(3, { rejectInReceiver: true })
+  const ch = new Chan<Promise<void>>(workersNum - 1, { rejectInReceiver: true })
   let err: Error | null = null
   const filter = new Filter({ now: Date.now(), filterTimeRange })
   const LogWrite: (chunk: any, encoding?: BufferEncoding) => Promise<any> =

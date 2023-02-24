@@ -31,6 +31,13 @@ const envVarsPrefix = process.env['REPOSITION_ENV_VARS_PREFIX'] || 'REPOSITION'
         default: 0,
         description:
           'Time range(seconds) to filter repos to send. Send all repos by default'
+      },
+      'workers-num': {
+        type: 'number',
+        array: false,
+        required: false,
+        default: 4,
+        description: 'The number of workers to fetch pages'
       }
     })
     .help().argv
@@ -40,6 +47,7 @@ const envVarsPrefix = process.env['REPOSITION_ENV_VARS_PREFIX'] || 'REPOSITION'
       apiKey: argv['api-key'],
       databaseId: argv['database-id'],
       filterTimeRange: argv['filter-time-range'],
+      workersNum: argv['workers-num'],
       stdin: process.stdin,
       stdout: process.stdout,
       stderr: process.stderr

@@ -5,6 +5,7 @@ type Opts = {
   apiKey: string
   databaseId: string
   filterTimeRange: number
+  workersNum: number
   stdin: Readable
   stdout: Writable
   stderr: Writable
@@ -14,6 +15,7 @@ export const cli = async ({
   apiKey,
   databaseId,
   filterTimeRange,
+  workersNum,
   stdin,
   stdout,
   stderr
@@ -24,6 +26,7 @@ export const cli = async ({
       client,
       databaseId,
       filterTimeRange,
+      workersNum,
       input: stdin,
       output: stdout
     })

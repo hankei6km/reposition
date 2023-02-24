@@ -64,6 +64,7 @@ describe('reposition', () => {
       client: mockClient,
       databaseId,
       filterTimeRange: 0,
+      workersNum: 1,
       input: stdin,
       output: stdout
     })
@@ -119,6 +120,7 @@ describe('reposition', () => {
       client: mockClient,
       databaseId,
       filterTimeRange: 172800, //2days
+      workersNum: 1,
       input: stdin,
       output: stdout
     })
@@ -159,6 +161,7 @@ describe('reposition', () => {
         client: mockClient,
         databaseId,
         filterTimeRange: 0,
+        workersNum: 1,
         input: stdin,
         output: stdout
       })
@@ -200,6 +203,7 @@ describe('reposition', () => {
         client: mockClient,
         databaseId,
         filterTimeRange: 0,
+        workersNum: 1,
         input: stdin,
         output: stdout
       })
