@@ -28,7 +28,10 @@
     "type": "git",
     "url": "git+https://github.com/hankei6km/reposition.git"
   },
-  "keywords": [],
+  "keywords": [
+    "github",
+    "notion"
+  ],
   "bugs": {
     "url": "https://github.com/hankei6km/reposition/issues"
   },
