@@ -29,6 +29,9 @@ export function pageParams(repo: RepoItem): {
         }
       ]
     },
+    isPrivate: {
+      checkbox: repo.isPrivate
+    },
     name: {
       rich_text: [
         {

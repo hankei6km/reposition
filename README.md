@@ -21,6 +21,7 @@ Create a database with following properties in Notion workspace.
 | name               | type           |
 | ------------------ | -------------- |
 | `title`            | `title`        |
+| `isPrivate`        | `checkbox`     |
 | `name`             | `text`         |
 | `owner`            | `text`         |
 | `url`              | `url`          |
@@ -36,7 +37,7 @@ Create a database with following properties in Notion workspace.
 $ export REPOSITION_API_KEY=<Integration API KEY>
 $ export REPOSITION_DATABASE_ID=<Database Id>
 $ gh repo list \
-  --json nameWithOwner,name,owner,url,description,repositoryTopics,createdAt,updatedAt,pushedAt,openGraphImageUrl \
+  --json nameWithOwner,isPrivate,name,owner,url,description,repositoryTopics,createdAt,updatedAt,pushedAt,openGraphImageUrl \
   --jq .[] | reposition
 ```
 
@@ -44,7 +45,7 @@ Add `-L` option to `gh` if you hava many repositories.
 
 ```bash
 $ gh repo list -L 50 \
-  --json nameWithOwner,name,owner,url,description,repositoryTopics,createdAt,updatedAt,pushedAt,openGraphImageUrl \
+  --json nameWithOwner,isPrivate,name,owner,url,description,repositoryTopics,createdAt,updatedAt,pushedAt,openGraphImageUrl \
   --jq .[] | reposition
 ```
 
@@ -52,7 +53,7 @@ When updating the database, use the `--filter-time-range` option to reduce the n
 
 ```bash
 $ gh repo list -L 50 \
-  --json nameWithOwner,name,owner,url,description,repositoryTopics,createdAt,updatedAt,pushedAt,openGraphImageUrl \
+  --json nameWithOwner,isPrivate,name,owner,url,description,repositoryTopics,createdAt,updatedAt,pushedAt,openGraphImageUrl \
   --jq .[] | reposition --filter-time-range 172800 # repositories updated(pushed) within 2 days.
 ```
 

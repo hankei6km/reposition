@@ -26,6 +26,9 @@ export const RepoItemSchema = {
     description: {
       type: 'string'
     },
+    isPrivate: {
+      type: 'boolean'
+    },
     name: {
       type: 'string'
     },
