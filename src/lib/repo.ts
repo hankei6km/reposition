@@ -2,6 +2,7 @@ export type RepoItem = {
   createdAt: string
   description: string
   nameWithOwner: string
+  isPrivate: boolean
   name: string
   openGraphImageUrl: string
   owner: { login: string; id?: string }

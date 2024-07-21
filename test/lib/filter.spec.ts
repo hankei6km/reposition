@@ -6,6 +6,7 @@ describe('Filter.do', () => {
     return {
       createdAt: '2022-02-05T14:16:25Z',
       description: '',
+      isPrivate: false,
       name: 'aaaaa',
       nameWithOwner: 'hankei6km/aaaaa',
       openGraphImageUrl:
