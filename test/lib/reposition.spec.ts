@@ -70,7 +70,7 @@ describe('reposition', () => {
     })
 
     expect(outData).toEqual('')
-    expect(mockClient.databases.query).toBeCalledTimes(data.length)
+    expect(mockClient.databases.query).toHaveBeenCalledTimes(data.length)
   })
 
   it('should drop items by filter', async () => {
@@ -126,7 +126,7 @@ describe('reposition', () => {
     })
 
     expect(outData).toEqual('')
-    expect(mockClient.databases.query).toBeCalledTimes(data.length - 1)
+    expect(mockClient.databases.query).toHaveBeenCalledTimes(data.length - 1)
   })
 
   it('should throw errors(invalid data)', async () => {
@@ -165,7 +165,7 @@ describe('reposition', () => {
         input: stdin,
         output: stdout
       })
-    ).rejects.toThrowError(
+    ).rejects.toThrow(
       "Validate Repo Item: must have required property 'createdAt'"
     )
   })
@@ -207,6 +207,6 @@ describe('reposition', () => {
         input: stdin,
         output: stdout
       })
-    ).rejects.toThrowError('send: query: test-error-in-query')
+    ).rejects.toThrow('send: query: test-error-in-query')
   })
 })
