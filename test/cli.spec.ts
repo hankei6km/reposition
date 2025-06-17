@@ -76,11 +76,11 @@ describe('cli', () => {
     const { mockClient: mockClientFn, dummyInstance } = (
       mockClient as any
     )._getMocks()
-    expect(mockClientFn).toBeCalledWith({ auth: apiKey })
+    expect(mockClientFn).toHaveBeenCalledWith({ auth: apiKey })
     const { mockReposition: mockRepositionFn } = (
       mockReposition as any
     )._getMocks()
-    expect(mockRepositionFn).toBeCalledWith({
+    expect(mockRepositionFn).toHaveBeenCalledWith({
       client: dummyInstance,
       databaseId,
       filterTimeRange,
@@ -113,7 +113,7 @@ describe('cli', () => {
 
     const { dummyInstance } = (mockClient as any)._getMocks()
     const mock = (mockReposition as any)._getMocks()
-    expect(mock.mockReposition).toBeCalledWith({
+    expect(mock.mockReposition).toHaveBeenCalledWith({
       client: dummyInstance,
       databaseId,
       filterTimeRange,

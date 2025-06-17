@@ -78,7 +78,7 @@ describe('validateRepoItem', () => {
         updatedAt: '2023-02-08T08:10:47Z',
         url: 'https://github.com/hankei6km/aaaaa'
       })
-    ).toThrowError('Validate Repo Item: must match format "date-time"')
+    ).toThrow('Validate Repo Item: must match format "date-time"')
     expect(() =>
       validateRepoItem({
         createdAt: '2022-04-11T07:40:07Z',
@@ -97,6 +97,6 @@ describe('validateRepoItem', () => {
         updatedAt: '2023-02-08T08:10:47Z',
         url: '<https://github.com/hankei6km/aaaa>'
       })
-    ).toThrowError('Validate Repo Item: must match format "uri"')
+    ).toThrow('Validate Repo Item: must match format "uri"')
   })
 })

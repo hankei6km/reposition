@@ -227,7 +227,7 @@ describe('send', () => {
     const mockClient = getMockClient([])
     await send(mockClient, databaseId, repo)
 
-    expect(mockClient.databases.query).toBeCalledWith({
+    expect(mockClient.databases.query).toHaveBeenCalledWith({
       database_id: databaseId,
       filter: {
         property: 'title',
@@ -236,11 +236,11 @@ describe('send', () => {
         }
       }
     })
-    expect(mockClient.pages.create).toBeCalledWith({
+    expect(mockClient.pages.create).toHaveBeenCalledWith({
       parent: { database_id: databaseId },
       ...pageParams(repo)
     })
-    expect(mockClient.pages.update).toBeCalledTimes(0)
+    expect(mockClient.pages.update).toHaveBeenCalledTimes(0)
   })
 
   it('should update a page', async () => {
@@ -248,7 +248,7 @@ describe('send', () => {
     const mockClient = getMockClient([{ id: pageId }])
     await send(mockClient, databaseId, repo)
 
-    expect(mockClient.databases.query).toBeCalledWith({
+    expect(mockClient.databases.query).toHaveBeenCalledWith({
       database_id: databaseId,
       filter: {
         property: 'title',
@@ -257,8 +257,8 @@ describe('send', () => {
         }
       }
     })
-    expect(mockClient.pages.create).toBeCalledTimes(0)
-    expect(mockClient.pages.update).toBeCalledWith({
+    expect(mockClient.pages.create).toHaveBeenCalledTimes(0)
+    expect(mockClient.pages.update).toHaveBeenCalledWith({
       page_id: pageId,
       ...pageParams(repo)
     })
@@ -269,12 +269,12 @@ describe('send', () => {
     const mockClient = getMockClient([], {
       query: new Error('test-error-in-query')
     })
-    await expect(send(mockClient, databaseId, repo)).rejects.toThrowError(
+    await expect(send(mockClient, databaseId, repo)).rejects.toThrow(
       'send: query: test-error-in-query'
     )
 
-    expect(mockClient.pages.create).toBeCalledTimes(0)
-    expect(mockClient.pages.update).toBeCalledTimes(0)
+    expect(mockClient.pages.create).toHaveBeenCalledTimes(0)
+    expect(mockClient.pages.update).toHaveBeenCalledTimes(0)
   })
 
   it('should throw error(create)', async () => {
@@ -282,11 +282,11 @@ describe('send', () => {
     const mockClient = getMockClient([], {
       create: new Error('test-error-in-create')
     })
-    await expect(send(mockClient, databaseId, repo)).rejects.toThrowError(
+    await expect(send(mockClient, databaseId, repo)).rejects.toThrow(
       'send: create: test-error-in-create'
     )
 
-    expect(mockClient.pages.update).toBeCalledTimes(0)
+    expect(mockClient.pages.update).toHaveBeenCalledTimes(0)
   })
 
   it('should throw error(update)', async () => {
@@ -294,10 +294,10 @@ describe('send', () => {
     const mockClient = getMockClient([{ id: pageId }], {
       update: new Error('test-error-in-update')
     })
-    await expect(send(mockClient, databaseId, repo)).rejects.toThrowError(
+    await expect(send(mockClient, databaseId, repo)).rejects.toThrow(
       'send: update: test-error-in-update'
     )
 
-    expect(mockClient.pages.create).toBeCalledTimes(0)
+    expect(mockClient.pages.create).toHaveBeenCalledTimes(0)
   })
 })
