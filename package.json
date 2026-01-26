@@ -40,7 +40,7 @@
   },
   "homepage": "https://github.com/hankei6km/reposition#readme",
   "dependencies": {
-    "@notionhq/client": "^4.0.0",
+    "@notionhq/client": "^5.8.0",
     "ajv": "^8.12.0",
     "ajv-formats": "^3.0.1",
     "chanpuru": "^0.2.1",
